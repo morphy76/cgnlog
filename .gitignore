@@ -1,0 +1,25 @@
+# cgnlog
+cgnlog
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# NetBeans
+nbproject/
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project

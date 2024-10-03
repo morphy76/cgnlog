@@ -1,0 +1,824 @@
+
+exec java -Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager -XX:MinRAMPercentage=50.0 -XX:MaxRAMPercentage=25.0 -XX:InitialRAMPercentage=20.0 -XX:+ExitOnOutOfMemoryError -Dzookeeper.client.secure=true -Dzookeeper.clientCnxnSocket=org.apache.zookeeper.ClientCnxnSocketNetty -Djava.security.auth.login.config=/etc/zookeeper/client/conf/zoo_jaas.conf -cp . -jar /deployments/quarkus-run.jar
+    ____   ____     ____   ____     ______            ______                             __     ____                  
+   /  _/  / __ \   /  _/  / __ \   / ____/           / ____/  _   __   ___     ____     / /_   / __ )   __  __   _____
+   / /   / /_/ /   / /   / / / /  / __/    ______   / __/    | | / /  / _ \   / __ \   / __/  / __  |  / / / /  / ___/
+ _/ /   / _, _/  _/ /   / /_/ /  / /___   /_____/  / /___    | |/ /  /  __/  / / / /  / /_   / /_/ /  / /_/ /  (__  ) 
+/___/  /_/ |_|  /___/  /_____/  /_____/           /_____/    |___/   \___/  /_/ /_/   \__/  /_____/   \__,_/  /____/  
+                                                                                                                      
+                                                                                       Powered by Quarkus 1.13.2.Final
+2024-07-30 08:10:18,660 INFO  [io.sma.rea.mes.kafka] [io.sma.rea.mes.kaf.imp.KafkaSource] <> <> () (main) SRMSG18229: Configured topics for channel 'event_bus_watcher': [dialog_event_bus]
+2024-07-30 08:10:18,676 INFO  [io.sma.rea.mes.kafka] [io.sma.rea.mes.kaf.imp.KafkaSource] <> <> () (main) SRMSG18214: Key deserializer omitted, using String as default
+2024-07-30 08:10:18,677 INFO  [io.sma.rea.mes.kafka] [io.sma.rea.mes.kaf.imp.KafkaSource] <> <> () (main) SRMSG18234: Auto-commit disabled for channel event_bus_watcher
+2024-07-30 08:10:18,747 INFO  [org.apa.kaf.cli.con.ConsumerConfig] [org.apa.kaf.com.con.AbstractConfig] <> <> () (main) ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = latest
+	bootstrap.servers = [p-kafka01.services.prd.boris.aiwave.io:9092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = kafka-consumer-event_bus_watcher
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = dialog_event_bus
+	group.instance.id = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class io.smallrye.reactive.messaging.kafka.fault.DeserializerWrapper
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 10000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = [hidden]
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = kafka
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = PLAIN
+	security.protocol = SASL_SSL
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	socket.connection.setup.timeout.max.ms = 127000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = /etc/ssl/truststore/kafka.truststore
+	ssl.truststore.password = [hidden]
+	ssl.truststore.type = JKS
+	value.deserializer = class io.smallrye.reactive.messaging.kafka.fault.DeserializerWrapper
+
+2024-07-30 08:10:18,869 INFO  [org.apa.kaf.com.sec.aut.AbstractLogin] [org.apa.kaf.com.sec.aut.AbstractLogin] <> <> () (main) Successfully logged in.
+2024-07-30 08:10:18,936 INFO  [org.apa.kaf.com.uti.AppInfoParser] [org.apa.kaf.com.uti.AppInfoParser$AppInfo] <> <> () (main) Kafka version: 2.7.0
+2024-07-30 08:10:18,937 INFO  [org.apa.kaf.com.uti.AppInfoParser] [org.apa.kaf.com.uti.AppInfoParser$AppInfo] <> <> () (main) Kafka commitId: 448719dc99a19793
+2024-07-30 08:10:18,937 INFO  [org.apa.kaf.com.uti.AppInfoParser] [org.apa.kaf.com.uti.AppInfoParser$AppInfo] <> <> () (main) Kafka startTimeMs: 1722327018935
+2024-07-30 08:10:18,986 INFO  [io.sma.rea.mes.kafka] [io.sma.rea.mes.kaf.imp.KafkaSource] <> <> () (main) SRMSG18240: 'throttled' commit strategy used for channel 'event_bus_watcher'
+2024-07-30 08:10:18,989 INFO  [io.sma.rea.mes.kafka] [io.sma.rea.mes.kaf.com.KafkaThrottledLatestProcessedCommit] <> <> () (main) SRMSG18232: Will commit for group 'dialog_event_bus' every 5000 milliseconds.
+2024-07-30 08:10:18,990 INFO  [io.sma.rea.mes.kafka] [io.sma.rea.mes.kaf.com.KafkaThrottledLatestProcessedCommit] <> <> () (main) SRMSG18236: Will mark throttled commit strategy for group 'dialog_event_bus' as unhealthy if records go more than 60000 milliseconds without being processed.
+2024-07-30 08:10:19,022 INFO  [io.sma.rea.mes.kafka] [io.sma.rea.mes.kaf.imp.KafkaSink] <> <> () (main) SRMSG18214: Key deserializer omitted, using String as default
+2024-07-30 08:10:19,023 INFO  [io.sma.rea.mes.kafka] [io.sma.rea.mes.kaf.imp.KafkaSink] <> <> () (main) SRMSG18237: Setting client.id for Kafka producer to kafka-producer-upstream_service_signal
+2024-07-30 08:10:19,030 INFO  [org.apa.kaf.cli.pro.ProducerConfig] [org.apa.kaf.com.con.AbstractConfig] <> <> () (main) ProducerConfig values: 
+	acks = 0
+	batch.size = 16384
+	bootstrap.servers = [p-kafka01.services.prd.boris.aiwave.io:9092]
+	buffer.memory = 33554432
+	client.dns.lookup = use_all_dns_ips
+	client.id = kafka-producer-upstream_service_signal
+	compression.type = none
+	connections.max.idle.ms = 540000
+	delivery.timeout.ms = 120000
+	enable.idempotence = false
+	interceptor.classes = []
+	internal.auto.downgrade.txn.commit = false
+	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	linger.ms = 0
+	max.block.ms = 60000
+	max.in.flight.requests.per.connection = 5
+	max.request.size = 1048576
+	metadata.max.age.ms = 300000
+	metadata.max.idle.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partitioner.class = class org.apache.kafka.clients.producer.internals.DefaultPartitioner
+	receive.buffer.bytes = 32768
+	reconnect.backoff.max.ms = 10000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = [hidden]
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = kafka
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = PLAIN
+	security.protocol = SASL_SSL
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 127000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = /etc/ssl/truststore/kafka.truststore
+	ssl.truststore.password = [hidden]
+	ssl.truststore.type = JKS
+	transaction.timeout.ms = 60000
+	transactional.id = null
+	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
+
+2024-07-30 08:10:19,057 WARN  [org.apa.kaf.cli.pro.ProducerConfig] [org.apa.kaf.com.con.AbstractConfig] <> <> () (main) The configuration 'partition.assignment.strategy' was supplied but isn't a known config.
+2024-07-30 08:10:19,057 INFO  [org.apa.kaf.com.uti.AppInfoParser] [org.apa.kaf.com.uti.AppInfoParser$AppInfo] <> <> () (main) Kafka version: 2.7.0
+2024-07-30 08:10:19,058 INFO  [org.apa.kaf.com.uti.AppInfoParser] [org.apa.kaf.com.uti.AppInfoParser$AppInfo] <> <> () (main) Kafka commitId: 448719dc99a19793
+2024-07-30 08:10:19,058 INFO  [org.apa.kaf.com.uti.AppInfoParser] [org.apa.kaf.com.uti.AppInfoParser$AppInfo] <> <> () (main) Kafka startTimeMs: 1722327019057
+2024-07-30 08:10:19,100 INFO  [io.sma.rea.mes.kafka] [io.sma.rea.mes.kaf.imp.KafkaSink] <> <> () (main) SRMSG18214: Key deserializer omitted, using String as default
+2024-07-30 08:10:19,101 INFO  [io.sma.rea.mes.kafka] [io.sma.rea.mes.kaf.imp.KafkaSink] <> <> () (main) SRMSG18237: Setting client.id for Kafka producer to kafka-producer-downstream_service_signal
+2024-07-30 08:10:19,102 INFO  [org.apa.kaf.cli.pro.ProducerConfig] [org.apa.kaf.com.con.AbstractConfig] <> <> () (main) ProducerConfig values: 
+	acks = 0
+	batch.size = 16384
+	bootstrap.servers = [p-kafka01.services.prd.boris.aiwave.io:9092]
+	buffer.memory = 33554432
+	client.dns.lookup = use_all_dns_ips
+	client.id = kafka-producer-downstream_service_signal
+	compression.type = none
+	connections.max.idle.ms = 540000
+	delivery.timeout.ms = 120000
+	enable.idempotence = false
+	interceptor.classes = []
+	internal.auto.downgrade.txn.commit = false
+	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	linger.ms = 0
+	max.block.ms = 60000
+	max.in.flight.requests.per.connection = 5
+	max.request.size = 1048576
+	metadata.max.age.ms = 300000
+	metadata.max.idle.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partitioner.class = class org.apache.kafka.clients.producer.internals.DefaultPartitioner
+	receive.buffer.bytes = 32768
+	reconnect.backoff.max.ms = 10000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = [hidden]
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = kafka
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = PLAIN
+	security.protocol = SASL_SSL
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 127000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = /etc/ssl/truststore/kafka.truststore
+	ssl.truststore.password = [hidden]
+	ssl.truststore.type = JKS
+	transaction.timeout.ms = 60000
+	transactional.id = null
+	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
+
+2024-07-30 08:10:19,119 WARN  [org.apa.kaf.cli.pro.ProducerConfig] [org.apa.kaf.com.con.AbstractConfig] <> <> () (main) The configuration 'partition.assignment.strategy' was supplied but isn't a known config.
+2024-07-30 08:10:19,120 INFO  [org.apa.kaf.com.uti.AppInfoParser] [org.apa.kaf.com.uti.AppInfoParser$AppInfo] <> <> () (main) Kafka version: 2.7.0
+2024-07-30 08:10:19,120 INFO  [org.apa.kaf.com.uti.AppInfoParser] [org.apa.kaf.com.uti.AppInfoParser$AppInfo] <> <> () (main) Kafka commitId: 448719dc99a19793
+2024-07-30 08:10:19,121 INFO  [org.apa.kaf.com.uti.AppInfoParser] [org.apa.kaf.com.uti.AppInfoParser$AppInfo] <> <> () (main) Kafka startTimeMs: 1722327019120
+2024-07-30 08:10:19,154 INFO  [io.sma.rea.mes.kafka] [io.sma.rea.mes.kaf.imp.KafkaSink] <> <> () (main) SRMSG18214: Key deserializer omitted, using String as default
+2024-07-30 08:10:19,154 INFO  [io.sma.rea.mes.kafka] [io.sma.rea.mes.kaf.imp.KafkaSink] <> <> () (main) SRMSG18237: Setting client.id for Kafka producer to kafka-producer-control_message
+2024-07-30 08:10:19,155 INFO  [org.apa.kaf.cli.pro.ProducerConfig] [org.apa.kaf.com.con.AbstractConfig] <> <> () (main) ProducerConfig values: 
+	acks = 1
+	batch.size = 16384
+	bootstrap.servers = [p-kafka01.services.prd.boris.aiwave.io:9092]
+	buffer.memory = 33554432
+	client.dns.lookup = use_all_dns_ips
+	client.id = kafka-producer-control_message
+	compression.type = none
+	connections.max.idle.ms = 540000
+	delivery.timeout.ms = 120000
+	enable.idempotence = false
+	interceptor.classes = []
+	internal.auto.downgrade.txn.commit = false
+	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	linger.ms = 0
+	max.block.ms = 60000
+	max.in.flight.requests.per.connection = 5
+	max.request.size = 1048576
+	metadata.max.age.ms = 300000
+	metadata.max.idle.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partitioner.class = class org.apache.kafka.clients.producer.internals.DefaultPartitioner
+	receive.buffer.bytes = 32768
+	reconnect.backoff.max.ms = 10000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = [hidden]
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = kafka
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = PLAIN
+	security.protocol = SASL_SSL
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 127000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = /etc/ssl/truststore/kafka.truststore
+	ssl.truststore.password = [hidden]
+	ssl.truststore.type = JKS
+	transaction.timeout.ms = 60000
+	transactional.id = null
+	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
+
+2024-07-30 08:10:19,165 WARN  [org.apa.kaf.cli.pro.ProducerConfig] [org.apa.kaf.com.con.AbstractConfig] <> <> () (main) The configuration 'partition.assignment.strategy' was supplied but isn't a known config.
+2024-07-30 08:10:19,165 INFO  [org.apa.kaf.com.uti.AppInfoParser] [org.apa.kaf.com.uti.AppInfoParser$AppInfo] <> <> () (main) Kafka version: 2.7.0
+2024-07-30 08:10:19,165 INFO  [org.apa.kaf.com.uti.AppInfoParser] [org.apa.kaf.com.uti.AppInfoParser$AppInfo] <> <> () (main) Kafka commitId: 448719dc99a19793
+2024-07-30 08:10:19,165 INFO  [org.apa.kaf.com.uti.AppInfoParser] [org.apa.kaf.com.uti.AppInfoParser$AppInfo] <> <> () (main) Kafka startTimeMs: 1722327019165
+2024-07-30 08:10:19,190 INFO  [io.sma.rea.mes.kafka] [io.sma.rea.mes.kaf.imp.KafkaSink] <> <> () (main) SRMSG18214: Key deserializer omitted, using String as default
+2024-07-30 08:10:19,191 INFO  [io.sma.rea.mes.kafka] [io.sma.rea.mes.kaf.imp.KafkaSink] <> <> () (main) SRMSG18237: Setting client.id for Kafka producer to kafka-producer-event_bus
+2024-07-30 08:10:19,192 INFO  [org.apa.kaf.cli.pro.ProducerConfig] [org.apa.kaf.com.con.AbstractConfig] <> <> () (main) ProducerConfig values: 
+	acks = 1
+	batch.size = 16384
+	bootstrap.servers = [p-kafka01.services.prd.boris.aiwave.io:9092]
+	buffer.memory = 33554432
+	client.dns.lookup = use_all_dns_ips
+	client.id = kafka-producer-event_bus
+	compression.type = none
+	connections.max.idle.ms = 540000
+	delivery.timeout.ms = 120000
+	enable.idempotence = false
+	interceptor.classes = []
+	internal.auto.downgrade.txn.commit = false
+	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	linger.ms = 0
+	max.block.ms = 60000
+	max.in.flight.requests.per.connection = 5
+	max.request.size = 1048576
+	metadata.max.age.ms = 300000
+	metadata.max.idle.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partitioner.class = class org.apache.kafka.clients.producer.internals.DefaultPartitioner
+	receive.buffer.bytes = 32768
+	reconnect.backoff.max.ms = 10000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = [hidden]
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = kafka
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = PLAIN
+	security.protocol = SASL_SSL
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 127000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = /etc/ssl/truststore/kafka.truststore
+	ssl.truststore.password = [hidden]
+	ssl.truststore.type = JKS
+	transaction.timeout.ms = 60000
+	transactional.id = null
+	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
+
+2024-07-30 08:10:19,202 WARN  [org.apa.kaf.cli.pro.ProducerConfig] [org.apa.kaf.com.con.AbstractConfig] <> <> () (main) The configuration 'partition.assignment.strategy' was supplied but isn't a known config.
+2024-07-30 08:10:19,202 WARN  [org.apa.kaf.cli.pro.ProducerConfig] [org.apa.kaf.com.con.AbstractConfig] <> <> () (main) The configuration 'merge' was supplied but isn't a known config.
+2024-07-30 08:10:19,203 INFO  [org.apa.kaf.com.uti.AppInfoParser] [org.apa.kaf.com.uti.AppInfoParser$AppInfo] <> <> () (main) Kafka version: 2.7.0
+2024-07-30 08:10:19,203 INFO  [org.apa.kaf.com.uti.AppInfoParser] [org.apa.kaf.com.uti.AppInfoParser$AppInfo] <> <> () (main) Kafka commitId: 448719dc99a19793
+2024-07-30 08:10:19,204 INFO  [org.apa.kaf.com.uti.AppInfoParser] [org.apa.kaf.com.uti.AppInfoParser$AppInfo] <> <> () (main) Kafka startTimeMs: 1722327019203
+2024-07-30 08:10:19,365 INFO  [org.apa.kaf.cli.con.KafkaConsumer] [org.apa.kaf.cli.con.KafkaConsumer] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] Subscribed to topic(s): dialog_event_bus
+2024-07-30 08:10:19,372 WARN  [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000111: Wrong value for [iride.platform.base.sleep.time.ms] which must be a positive integer, actually [null]; using default [100]
+2024-07-30 08:10:19,375 WARN  [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000111: Wrong value for [iride.platform.max.sleep.time.ms] which must be a positive integer, actually [null]; using default [1000]
+2024-07-30 08:10:19,375 WARN  [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000111: Wrong value for [iride.platform.max.connection.retries] which must be a positive integer, actually [null]; using default [10]
+2024-07-30 08:10:19,375 WARN  [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000111: Wrong value for [iride.platform.session.timeout.ms] which must be a positive integer, actually [null]; using default [10000]
+2024-07-30 08:10:19,375 WARN  [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000111: Wrong value for [iride.platform.connection.timeout.ms] which must be a positive integer, actually [null]; using default [10000]
+2024-07-30 08:10:19,376 WARN  [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000111: Wrong value for [iride.platform.tenant.pool.initial.size] which must be a positive integer, actually [null]; using default [1]
+2024-07-30 08:10:19,529 INFO  [org.apa.cur.fra.imp.CuratorFrameworkImpl] [org.apa.cur.fra.imp.CuratorFrameworkImpl] <> <> () (executor-thread-1) Starting
+2024-07-30 08:10:19,542 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.Environment] <> <> () (executor-thread-1) Client environment:zookeeper.version=3.8.0-5a02a05eddb59aee6ac762f7ea82e92a68eb9c0f, built on 2022-02-25 08:49 UTC
+2024-07-30 08:10:19,543 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.Environment] <> <> () (executor-thread-1) Client environment:host.name=aiw-dialog-event-bus-68c4cc7c94-fq8tg
+2024-07-30 08:10:19,543 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.Environment] <> <> () (executor-thread-1) Client environment:java.version=11.0.20
+2024-07-30 08:10:19,544 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.Environment] <> <> () (executor-thread-1) Client environment:java.vendor=Alpine
+2024-07-30 08:10:19,544 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.Environment] <> <> () (executor-thread-1) Client environment:java.home=/usr/lib/jvm/java-11-openjdk
+2024-07-30 08:10:19,544 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.Environment] <> <> () (executor-thread-1) Client environment:java.class.path=/deployments/quarkus-run.jar
+2024-07-30 08:10:19,545 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.Environment] <> <> () (executor-thread-1) Client environment:java.library.path=/usr/lib/jvm/java-11-openjdk/lib/server:/usr/lib/jvm/java-11-openjdk/lib:/usr/lib/jvm/java-11-openjdk/../lib:/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib
+2024-07-30 08:10:19,545 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.Environment] <> <> () (executor-thread-1) Client environment:java.io.tmpdir=/tmp
+2024-07-30 08:10:19,546 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.Environment] <> <> () (executor-thread-1) Client environment:java.compiler=<NA>
+2024-07-30 08:10:19,546 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.Environment] <> <> () (executor-thread-1) Client environment:os.name=Linux
+2024-07-30 08:10:19,546 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.Environment] <> <> () (executor-thread-1) Client environment:os.arch=amd64
+2024-07-30 08:10:19,547 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.Environment] <> <> () (executor-thread-1) Client environment:os.version=5.15.0-1054-azure
+2024-07-30 08:10:19,547 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.Environment] <> <> () (executor-thread-1) Client environment:user.name=?
+2024-07-30 08:10:19,547 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.Environment] <> <> () (executor-thread-1) Client environment:user.home=?
+2024-07-30 08:10:19,548 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.Environment] <> <> () (executor-thread-1) Client environment:user.dir=/deployments
+2024-07-30 08:10:19,548 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.Environment] <> <> () (executor-thread-1) Client environment:os.memory.free=78MB
+2024-07-30 08:10:19,548 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.Environment] <> <> () (executor-thread-1) Client environment:os.memory.max=123MB
+2024-07-30 08:10:19,549 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.Environment] <> <> () (executor-thread-1) Client environment:os.memory.total=100MB
+2024-07-30 08:10:19,551 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.ZooKeeper] <> <> () (executor-thread-1) Initiating client connection, connectString=p-zk01.services.prd.boris.aiwave.io:3181 sessionTimeout=10000 watcher=org.apache.curator.ConnectionState@55d1a7d4
+2024-07-30 08:10:19,556 INFO  [org.apa.zoo.com.X509Util] [org.apa.zoo.com.X509Util] <> <> () (executor-thread-1) Setting -D jdk.tls.rejectClientInitiatedRenegotiation=true to disable client-initiated TLS renegotiation
+2024-07-30 08:10:19,565 INFO  [org.apa.zoo.ClientCnxnSocket] [org.apa.zoo.ClientCnxnSocket] <> <> () (executor-thread-1) jute.maxbuffer value is 1048575 Bytes
+2024-07-30 08:10:19,575 INFO  [org.apa.zoo.ClientCnxn] [org.apa.zoo.ClientCnxn] <> <> () (executor-thread-1) zookeeper.request.timeout value is 0. feature enabled=false
+2024-07-30 08:10:19,595 INFO  [org.apa.cur.fra.imp.CuratorFrameworkImpl] [org.apa.cur.fra.imp.CuratorFrameworkImpl] <> <> () (executor-thread-1) Default schema
+2024-07-30 08:10:19,595 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000103: Created general platform connection for service [dialog].
+2024-07-30 08:10:19,599 WARN  [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000111: Wrong value for [iride.platform.admin.base.sleep.time.ms] which must be a positive integer, actually [null]; using default [100]
+2024-07-30 08:10:19,599 WARN  [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000111: Wrong value for [iride.platform.admin.max.sleep.time.ms] which must be a positive integer, actually [null]; using default [1000]
+2024-07-30 08:10:19,600 WARN  [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000111: Wrong value for [iride.platform.admin.max.connection.retries] which must be a positive integer, actually [null]; using default [10]
+2024-07-30 08:10:19,600 WARN  [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000111: Wrong value for [iride.platform.admin.session.timeout.ms] which must be a positive integer, actually [null]; using default [10000]
+2024-07-30 08:10:19,600 WARN  [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000111: Wrong value for [iride.platform.admin.connection.timeout.ms] which must be a positive integer, actually [null]; using default [10000]
+2024-07-30 08:10:19,602 INFO  [org.apa.cur.fra.imp.CuratorFrameworkImpl] [org.apa.cur.fra.imp.CuratorFrameworkImpl] <> <> () (executor-thread-1) Starting
+2024-07-30 08:10:19,603 INFO  [org.apa.zoo.ZooKeeper] [org.apa.zoo.ZooKeeper] <> <> () (executor-thread-1) Initiating client connection, connectString=p-zk01.services.prd.boris.aiwave.io:3181 sessionTimeout=10000 watcher=org.apache.curator.ConnectionState@12d46045
+2024-07-30 08:10:19,604 INFO  [org.apa.zoo.ClientCnxnSocket] [org.apa.zoo.ClientCnxnSocket] <> <> () (executor-thread-1) jute.maxbuffer value is 1048575 Bytes
+2024-07-30 08:10:19,605 INFO  [org.apa.zoo.ClientCnxn] [org.apa.zoo.ClientCnxn] <> <> () (executor-thread-1) zookeeper.request.timeout value is 0. feature enabled=false
+2024-07-30 08:10:19,607 INFO  [org.apa.cur.fra.imp.CuratorFrameworkImpl] [org.apa.cur.fra.imp.CuratorFrameworkImpl] <> <> () (executor-thread-1) Default schema
+2024-07-30 08:10:19,612 INFO  [org.apa.kaf.cli.Metadata] [org.apa.kaf.cli.Metadata] <> <> () (kafka-producer-network-thread | kafka-producer-upstream_service_signal) [Producer clientId=kafka-producer-upstream_service_signal] Cluster ID: I7yj8wF7Q0esd2rJnXuhRQ
+2024-07-30 08:10:19,613 INFO  [org.apa.kaf.cli.Metadata] [org.apa.kaf.cli.Metadata] <> <> () (kafka-producer-network-thread | kafka-producer-event_bus) [Producer clientId=kafka-producer-event_bus] Cluster ID: I7yj8wF7Q0esd2rJnXuhRQ
+2024-07-30 08:10:19,615 INFO  [org.apa.kaf.cli.Metadata] [org.apa.kaf.cli.Metadata] <> <> () (kafka-producer-network-thread | kafka-producer-control_message) [Producer clientId=kafka-producer-control_message] Cluster ID: I7yj8wF7Q0esd2rJnXuhRQ
+2024-07-30 08:10:19,615 INFO  [org.apa.kaf.cli.Metadata] [org.apa.kaf.cli.Metadata] <> <> () (kafka-producer-network-thread | kafka-producer-downstream_service_signal) [Producer clientId=kafka-producer-downstream_service_signal] Cluster ID: I7yj8wF7Q0esd2rJnXuhRQ
+2024-07-30 08:10:19,618 INFO  [org.apa.kaf.cli.Metadata] [org.apa.kaf.cli.Metadata] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] Cluster ID: I7yj8wF7Q0esd2rJnXuhRQ
+2024-07-30 08:10:19,618 INFO  [org.apa.zoo.Login] [org.apa.zoo.Login] <> <> () (executor-thread-1-SendThread(p-zk01.services.prd.boris.aiwave.io:3181)) Client successfully logged in.
+2024-07-30 08:10:19,618 INFO  [org.apa.zoo.Login] [org.apa.zoo.Login] <> <> () (executor-thread-1-SendThread(p-zk01.services.prd.boris.aiwave.io:3181)) Client successfully logged in.
+2024-07-30 08:10:19,619 INFO  [io.quarkus] [io.qua.boo.run.Timing] <> <> () (main) event-bus 8.5.7 on JVM (powered by Quarkus 1.13.2.Final) started in 2.215s. Listening on: http://0.0.0.0:8080
+2024-07-30 08:10:19,619 INFO  [io.quarkus] [io.qua.boo.run.Timing] <> <> () (main) Profile prod activated. 
+2024-07-30 08:10:19,619 INFO  [io.quarkus] [io.qua.boo.run.Timing] <> <> () (main) Installed features: [cdi, jaeger, micrometer, mongodb-client, mutiny, resteasy-reactive, resteasy-reactive-jsonb, smallrye-context-propagation, smallrye-fault-tolerance, smallrye-health, smallrye-openapi, smallrye-opentracing, smallrye-reactive-messaging, smallrye-reactive-messaging-kafka, vertx]
+2024-07-30 08:10:19,620 INFO  [org.apa.zoo.cli.ZooKeeperSaslClient] [org.apa.zoo.uti.SecurityUtils] <> <> () (executor-thread-1-SendThread(p-zk01.services.prd.boris.aiwave.io:3181)) Client will use DIGEST-MD5 as SASL mechanism.
+2024-07-30 08:10:19,620 INFO  [org.apa.kaf.cli.con.int.AbstractCoordinator] [org.apa.kaf.cli.con.int.AbstractCoordinator$FindCoordinatorResponseHandler] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] Discovered group coordinator p-kafka01-n01.services.prd.boris.aiwave.io:9092 (id: 2147483646 rack: null)
+2024-07-30 08:10:19,620 INFO  [org.apa.zoo.cli.ZooKeeperSaslClient] [org.apa.zoo.uti.SecurityUtils] <> <> () (executor-thread-1-SendThread(p-zk01.services.prd.boris.aiwave.io:3181)) Client will use DIGEST-MD5 as SASL mechanism.
+2024-07-30 08:10:19,628 INFO  [org.apa.zoo.ClientCnxn] [org.apa.zoo.ClientCnxn$SendThread] <> <> () (executor-thread-1-SendThread(p-zk01.services.prd.boris.aiwave.io:3181)) Opening socket connection to server p-zk01.services.prd.boris.aiwave.io/10.20.0.107:3181.
+2024-07-30 08:10:19,628 INFO  [org.apa.zoo.ClientCnxn] [org.apa.zoo.ClientCnxn$SendThread] <> <> () (executor-thread-1-SendThread(p-zk01.services.prd.boris.aiwave.io:3181)) SASL config status: Will attempt to SASL-authenticate using Login Context section 'Client'
+2024-07-30 08:10:19,628 INFO  [org.apa.zoo.ClientCnxn] [org.apa.zoo.ClientCnxn$SendThread] <> <> () (executor-thread-1-SendThread(p-zk01.services.prd.boris.aiwave.io:3181)) Opening socket connection to server p-zk01.services.prd.boris.aiwave.io/10.20.0.107:3181.
+2024-07-30 08:10:19,629 INFO  [org.apa.zoo.ClientCnxn] [org.apa.zoo.ClientCnxn$SendThread] <> <> () (executor-thread-1-SendThread(p-zk01.services.prd.boris.aiwave.io:3181)) SASL config status: Will attempt to SASL-authenticate using Login Context section 'Client'
+2024-07-30 08:10:19,634 INFO  [org.apa.kaf.cli.con.int.AbstractCoordinator] [org.apa.kaf.cli.con.int.AbstractCoordinator] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] (Re-)joining group
+2024-07-30 08:10:19,645 WARN  [org.apa.zoo.com.X509Util] [org.apa.zoo.com.X509Util] <> <> () (nioEventLoopGroup-3-1) zookeeper.ssl.keyStore.location not specified
+2024-07-30 08:10:19,646 WARN  [org.apa.zoo.com.X509Util] [org.apa.zoo.com.X509Util] <> <> () (nioEventLoopGroup-3-1) zookeeper.ssl.trustStore.location not specified
+2024-07-30 08:10:19,649 WARN  [org.apa.zoo.com.X509Util] [org.apa.zoo.com.X509Util] <> <> () (nioEventLoopGroup-2-1) zookeeper.ssl.keyStore.location not specified
+2024-07-30 08:10:19,649 WARN  [org.apa.zoo.com.X509Util] [org.apa.zoo.com.X509Util] <> <> () (nioEventLoopGroup-2-1) zookeeper.ssl.trustStore.location not specified
+2024-07-30 08:10:19,680 INFO  [org.apa.kaf.cli.con.int.AbstractCoordinator] [org.apa.kaf.cli.con.int.AbstractCoordinator] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] (Re-)joining group
+2024-07-30 08:10:19,682 INFO  [org.apa.zoo.ClientCnxnSocketNetty] [org.apa.zoo.ClientCnxnSocketNetty$ZKClientPipelineFactory] <> <> () (nioEventLoopGroup-3-1) SSL handler added for channel: [id: 0x63283837]
+2024-07-30 08:10:19,682 INFO  [org.apa.zoo.ClientCnxnSocketNetty] [org.apa.zoo.ClientCnxnSocketNetty$ZKClientPipelineFactory] <> <> () (nioEventLoopGroup-2-1) SSL handler added for channel: [id: 0x9eaacbff]
+2024-07-30 08:10:19,691 INFO  [org.apa.zoo.ClientCnxn] [org.apa.zoo.ClientCnxn$SendThread] <> <> () (nioEventLoopGroup-2-1) Socket connection established, initiating session, client: /10.244.17.141:57586, server: p-zk01.services.prd.boris.aiwave.io/10.20.0.107:3181
+2024-07-30 08:10:19,692 INFO  [org.apa.zoo.ClientCnxn] [org.apa.zoo.ClientCnxn$SendThread] <> <> () (nioEventLoopGroup-3-1) Socket connection established, initiating session, client: /10.244.17.141:57588, server: p-zk01.services.prd.boris.aiwave.io/10.20.0.107:3181
+2024-07-30 08:10:19,713 INFO  [org.apa.zoo.ClientCnxnSocketNetty] [org.apa.zoo.ClientCnxnSocketNetty$1] <> <> () (nioEventLoopGroup-2-1) channel is connected: [id: 0x9eaacbff, L:/10.244.17.141:57586 - R:p-zk01.services.prd.boris.aiwave.io/10.20.0.107:3181]
+2024-07-30 08:10:19,713 INFO  [org.apa.zoo.ClientCnxnSocketNetty] [org.apa.zoo.ClientCnxnSocketNetty$1] <> <> () (nioEventLoopGroup-3-1) channel is connected: [id: 0x63283837, L:/10.244.17.141:57588 - R:p-zk01.services.prd.boris.aiwave.io/10.20.0.107:3181]
+2024-07-30 08:10:19,753 INFO  [org.apa.zoo.ClientCnxn] [org.apa.zoo.ClientCnxn$SendThread] <> <> () (nioEventLoopGroup-2-1) Session establishment complete on server p-zk01.services.prd.boris.aiwave.io/10.20.0.107:3181, session id = 0x2003722f84303e0, negotiated timeout = 10000
+2024-07-30 08:10:19,760 INFO  [org.apa.zoo.ClientCnxn] [org.apa.zoo.ClientCnxn$SendThread] <> <> () (nioEventLoopGroup-3-1) Session establishment complete on server p-zk01.services.prd.boris.aiwave.io/10.20.0.107:3181, session id = 0x3023e680ca90137, negotiated timeout = 10000
+2024-07-30 08:10:19,766 INFO  [org.apa.cur.fra.sta.ConnectionStateManager] [org.apa.cur.fra.sta.ConnectionStateManager] <> <> () (executor-thread-1-EventThread) State change: CONNECTED
+2024-07-30 08:10:19,766 INFO  [org.apa.cur.fra.sta.ConnectionStateManager] [org.apa.cur.fra.sta.ConnectionStateManager] <> <> () (executor-thread-1-EventThread) State change: CONNECTED
+2024-07-30 08:10:19,805 INFO  [org.apa.cur.fra.imp.EnsembleTracker] [org.apa.cur.fra.imp.EnsembleTracker] <> <> () (executor-thread-1-EventThread) New config event received: {server.2=p-zk01-n02.services.prd.boris.aiwave.io:2888:3888:participant, server.1=p-zk01-n01.services.prd.boris.aiwave.io:2888:3888:participant, server.3=p-zk01-n03.services.prd.boris.aiwave.io:2888:3888:participant, version=0}
+2024-07-30 08:10:19,805 INFO  [org.apa.cur.fra.imp.EnsembleTracker] [org.apa.cur.fra.imp.EnsembleTracker] <> <> () (executor-thread-1-EventThread) New config event received: {server.2=p-zk01-n02.services.prd.boris.aiwave.io:2888:3888:participant, server.1=p-zk01-n01.services.prd.boris.aiwave.io:2888:3888:participant, server.3=p-zk01-n03.services.prd.boris.aiwave.io:2888:3888:participant, version=0}
+2024-07-30 08:10:19,826 ERROR [org.apa.cur.fra.imp.EnsembleTracker] [org.apa.cur.fra.imp.EnsembleTracker] <> <> () (executor-thread-1-EventThread) Invalid config event received: {server.2=p-zk01-n02.services.prd.boris.aiwave.io:2888:3888:participant, server.1=p-zk01-n01.services.prd.boris.aiwave.io:2888:3888:participant, server.3=p-zk01-n03.services.prd.boris.aiwave.io:2888:3888:participant, version=0}
+2024-07-30 08:10:19,826 INFO  [org.apa.cur.fra.imp.EnsembleTracker] [org.apa.cur.fra.imp.EnsembleTracker] <> <> () (executor-thread-1-EventThread) New config event received: {server.2=p-zk01-n02.services.prd.boris.aiwave.io:2888:3888:participant, server.1=p-zk01-n01.services.prd.boris.aiwave.io:2888:3888:participant, server.3=p-zk01-n03.services.prd.boris.aiwave.io:2888:3888:participant, version=0}
+2024-07-30 08:10:19,827 ERROR [org.apa.cur.fra.imp.EnsembleTracker] [org.apa.cur.fra.imp.EnsembleTracker] <> <> () (executor-thread-1-EventThread) Invalid config event received: {server.2=p-zk01-n02.services.prd.boris.aiwave.io:2888:3888:participant, server.1=p-zk01-n01.services.prd.boris.aiwave.io:2888:3888:participant, server.3=p-zk01-n03.services.prd.boris.aiwave.io:2888:3888:participant, version=0}
+2024-07-30 08:10:19,827 ERROR [org.apa.cur.fra.imp.EnsembleTracker] [org.apa.cur.fra.imp.EnsembleTracker] <> <> () (executor-thread-1-EventThread) Invalid config event received: {server.2=p-zk01-n02.services.prd.boris.aiwave.io:2888:3888:participant, server.1=p-zk01-n01.services.prd.boris.aiwave.io:2888:3888:participant, server.3=p-zk01-n03.services.prd.boris.aiwave.io:2888:3888:participant, version=0}
+2024-07-30 08:10:19,828 INFO  [org.apa.cur.fra.imp.EnsembleTracker] [org.apa.cur.fra.imp.EnsembleTracker] <> <> () (executor-thread-1-EventThread) New config event received: {server.2=p-zk01-n02.services.prd.boris.aiwave.io:2888:3888:participant, server.1=p-zk01-n01.services.prd.boris.aiwave.io:2888:3888:participant, server.3=p-zk01-n03.services.prd.boris.aiwave.io:2888:3888:participant, version=0}
+2024-07-30 08:10:19,828 ERROR [org.apa.cur.fra.imp.EnsembleTracker] [org.apa.cur.fra.imp.EnsembleTracker] <> <> () (executor-thread-1-EventThread) Invalid config event received: {server.2=p-zk01-n02.services.prd.boris.aiwave.io:2888:3888:participant, server.1=p-zk01-n01.services.prd.boris.aiwave.io:2888:3888:participant, server.3=p-zk01-n03.services.prd.boris.aiwave.io:2888:3888:participant, version=0}
+2024-07-30 08:10:19,830 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000502: Registering service [eventbus] with version [1.0].
+2024-07-30 08:10:19,870 DEBUG [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000538: [/services/catalog/eventbus/1.0] already subscribed, manifest updated.
+2024-07-30 08:10:19,871 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientReadiness] <> <> () (executor-thread-1) INFR-000113: Curator framework producer is now ready for service [dialog]
+2024-07-30 08:10:19,886 INFO  [org.apa.cur.uti.Compatibility] [org.apa.cur.uti.Compatibility] <> <> () (executor-thread-1) Using org.apache.zookeeper.server.quorum.MultipleAddresses
+2024-07-30 08:10:19,922 WARN  [it.alm.iri.cog.pla.cipher] [it.alm.iri.cog.pla.cyp.bas.inf.BasicCipher] <> <> () (executor-thread-1) INFR-000702: Cannot setup the basic cipher, falling back to passthrough encryption.
+2024-07-30 08:10:19,923 DEBUG [it.alm.iri.cog.pla.configuration] [it.alm.iri.cog.pla.con.cat.ConfigCatalogInitializer] <> <> () (executor-thread-1) INFR-000212: Granting the catalog [/configuration/dialog] for cognitive configuration properties.
+2024-07-30 08:10:19,938 DEBUG [it.alm.iri.cog.pla.configuration] [it.alm.iri.cog.pla.con.cat.ConfigCatalogInitializer] <> <> () (executor-thread-1) INFR-000210: Start to refresh the config catalog for component [channel-event-bus].
+2024-07-30 08:10:19,966 DEBUG [it.alm.iri.cog.pla.configuration] [it.alm.iri.cog.pla.con.cat.ConfigCatalogInitializer] <> <> () (executor-thread-1) INFR-000214: Rebuild the config catalog for component [channel-event-bus].
+2024-07-30 08:10:19,983 DEBUG [it.alm.iri.cog.pla.configuration] [it.alm.iri.cog.pla.con.cat.ConfigCatalogInitializer] <> <> () (executor-thread-1) INFR-000213: End of refreshing the config catalog for component [channel-event-bus].
+2024-07-30 08:10:20,360 INFO  [org.apa.kaf.cli.con.int.AbstractCoordinator] [org.apa.kaf.cli.con.int.AbstractCoordinator$JoinGroupResponseHandler] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] Successfully joined group with generation Generation{generationId=4288, memberId='kafka-consumer-event_bus_watcher-9ec05fcd-68b7-4601-b3ea-58c300bf0f7d', protocol='cooperative-sticky'}
+2024-07-30 08:10:20,368 INFO  [org.apa.kaf.cli.con.int.AbstractCoordinator] [org.apa.kaf.cli.con.int.AbstractCoordinator$SyncGroupResponseHandler] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] Successfully synced group in generation Generation{generationId=4288, memberId='kafka-consumer-event_bus_watcher-9ec05fcd-68b7-4601-b3ea-58c300bf0f7d', protocol='cooperative-sticky'}
+2024-07-30 08:10:20,371 INFO  [org.apa.kaf.cli.con.int.ConsumerCoordinator] [org.apa.kaf.cli.con.int.ConsumerCoordinator] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] Updating assignment with
+	Assigned partitions:                       [dialog_event_bus-9, dialog_event_bus-6, dialog_event_bus-7]
+	Current owned partitions:                  []
+	Added partitions (assigned - owned):       [dialog_event_bus-9, dialog_event_bus-6, dialog_event_bus-7]
+	Revoked partitions (owned - assigned):     []
+
+2024-07-30 08:10:20,371 INFO  [org.apa.kaf.cli.con.int.ConsumerCoordinator] [org.apa.kaf.cli.con.int.ConsumerCoordinator] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] Notifying assignor about the new Assignment(partitions=[dialog_event_bus-6, dialog_event_bus-7, dialog_event_bus-9])
+2024-07-30 08:10:20,373 INFO  [org.apa.kaf.cli.con.int.ConsumerCoordinator] [org.apa.kaf.cli.con.int.ConsumerCoordinator] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] Adding newly assigned partitions: dialog_event_bus-9, dialog_event_bus-6, dialog_event_bus-7
+2024-07-30 08:10:20,386 INFO  [org.apa.kaf.cli.con.int.ConsumerCoordinator] [org.apa.kaf.cli.con.int.ConsumerCoordinator] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] Setting offset for partition dialog_event_bus-9 to the committed offset FetchPosition{offset=46399, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[p-kafka01-n01.services.prd.boris.aiwave.io:9092 (id: 1 rack: null)], epoch=42}}
+2024-07-30 08:10:20,387 INFO  [org.apa.kaf.cli.con.int.ConsumerCoordinator] [org.apa.kaf.cli.con.int.ConsumerCoordinator] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] Setting offset for partition dialog_event_bus-6 to the committed offset FetchPosition{offset=52688, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[p-kafka01-n01.services.prd.boris.aiwave.io:9092 (id: 1 rack: null)], epoch=42}}
+2024-07-30 08:10:20,387 INFO  [org.apa.kaf.cli.con.int.ConsumerCoordinator] [org.apa.kaf.cli.con.int.ConsumerCoordinator] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] Setting offset for partition dialog_event_bus-7 to the committed offset FetchPosition{offset=52691, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[p-kafka01-n01.services.prd.boris.aiwave.io:9092 (id: 1 rack: null)], epoch=51}}
+2024-07-30 08:10:20,559 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> (7ac8d319bf80b63b) (vert.x-eventloop-thread-2) INFR-000108: Create platform connection for tenant [almawave-conversationalai] within the service [dialog]
+2024-07-30 08:10:20,591 WARN  [it.alm.iri.cog.pla.cipher] [it.alm.iri.cog.pla.cyp.bas.inf.BasicCipher] <> <> (7ac8d319bf80b63b) (vert.x-eventloop-thread-2) INFR-000702: Cannot setup the basic cipher, falling back to passthrough encryption.
+2024-07-30 08:10:20,607 WARN  [it.alm.iri.cog.pla.cipher] [it.alm.iri.cog.pla.cyp.bas.inf.BasicCipher] <almawave> <conversationalai> (7ac8d319bf80b63b) (vert.x-eventloop-thread-2) INFR-000702: Cannot setup the basic cipher, falling back to passthrough encryption.
+2024-07-30 08:10:20,931 WARN  [io.jae.int.JaegerSpan] [io.jae.int.JaegerSpan] <almawave> <conversationalai> (7ac8d319bf80b63b) (vert.x-eventloop-thread-2) Span has already been finished; will not be reported again.
+2024-07-30 08:10:25,006 WARN  [it.alm.iri.cog.pla.admin] [it.alm.iri.cog.pla.adm.ten.rec.TenantManagerBean] <> <> () (executor-thread-1) INFR-000007: Fail to release a lock.: java.lang.IllegalMonitorStateException: You do not own the lock: /tenant/locks
+	at org.apache.curator.framework.recipes.locks.InterProcessMutex.release(InterProcessMutex.java:140)
+	at it.almawave.iride.cognitive.platform.admin.tenant.recipe.TenantManagerBean.safelyReleaseTheLock(TenantManagerBean.java:262)
+	at it.almawave.iride.cognitive.platform.admin.tenant.recipe.TenantManagerBean.init(TenantManagerBean.java:171)
+	at it.almawave.iride.cognitive.platform.admin.tenant.recipe.TenantManagerBean_Bean.create(TenantManagerBean_Bean.zig:586)
+	at it.almawave.iride.cognitive.platform.admin.tenant.recipe.TenantManagerBean_Bean.create(TenantManagerBean_Bean.zig:602)
+	at io.quarkus.arc.impl.AbstractSharedContext.createInstanceHandle(AbstractSharedContext.java:96)
+	at io.quarkus.arc.impl.AbstractSharedContext.access$000(AbstractSharedContext.java:14)
+	at io.quarkus.arc.impl.AbstractSharedContext$1.get(AbstractSharedContext.java:29)
+	at io.quarkus.arc.impl.AbstractSharedContext$1.get(AbstractSharedContext.java:26)
+	at io.quarkus.arc.impl.LazyValue.get(LazyValue.java:26)
+	at io.quarkus.arc.impl.ComputingCache.computeIfAbsent(ComputingCache.java:69)
+	at io.quarkus.arc.impl.AbstractSharedContext.get(AbstractSharedContext.java:26)
+	at it.almawave.iride.cognitive.platform.admin.tenant.recipe.TenantManagerBean_Observer_bootstrapTenants_10fb7a1eab7c49af1fbe012f1192c6898596637b.notify(TenantManagerBean_Observer_bootstrapTenants_10fb7a1eab7c49af1fbe012f1192c6898596637b.zig:135)
+	at io.quarkus.arc.impl.EventImpl$Notifier.notifyObservers(EventImpl.java:283)
+	at io.quarkus.arc.impl.EventImpl$Notifier.notify(EventImpl.java:264)
+	at io.quarkus.arc.impl.EventImpl.fire(EventImpl.java:70)
+	at it.almawave.iride.cognitive.platform.client.ClientProducer.wakeUp(ClientProducer.java:98)
+	at it.almawave.iride.cognitive.platform.client.ClientProducer_Observer_wakeUp_ba6d87c118ef492c40b22243d5ad2fd38d3f6709.notify(ClientProducer_Observer_wakeUp_ba6d87c118ef492c40b22243d5ad2fd38d3f6709.zig:147)
+	at io.quarkus.arc.impl.EventImpl$Notifier.notifyObservers(EventImpl.java:283)
+	at io.quarkus.arc.impl.EventImpl$Notifier.notify(EventImpl.java:268)
+	at io.quarkus.arc.impl.EventImpl$1.get(EventImpl.java:98)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1700)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.run(EnhancedQueueExecutor.java:2415)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1452)
+	at org.jboss.threads.DelegatingRunnable.run(DelegatingRunnable.java:29)
+	at org.jboss.threads.ThreadLocalResettingRunnable.run(ThreadLocalResettingRunnable.java:29)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+	at org.jboss.threads.JBossThread.run(JBossThread.java:501)
+
+2024-07-30 08:10:26,226 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud009] within the service [dialog]
+2024-07-30 08:10:26,233 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,235 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud009].
+2024-07-30 08:10:26,249 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud008] within the service [dialog]
+2024-07-30 08:10:26,253 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,254 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud008].
+2024-07-30 08:10:26,259 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud007] within the service [dialog]
+2024-07-30 08:10:26,264 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,265 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud007].
+2024-07-30 08:10:26,271 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [unimarconi-vta] within the service [dialog]
+2024-07-30 08:10:26,276 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,277 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [unimarconi-vta].
+2024-07-30 08:10:26,282 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud006] within the service [dialog]
+2024-07-30 08:10:26,288 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,289 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud006].
+2024-07-30 08:10:26,294 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud005] within the service [dialog]
+2024-07-30 08:10:26,300 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,301 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud005].
+2024-07-30 08:10:26,306 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud004] within the service [dialog]
+2024-07-30 08:10:26,312 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,313 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud004].
+2024-07-30 08:10:26,318 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud003] within the service [dialog]
+2024-07-30 08:10:26,324 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,325 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud003].
+2024-07-30 08:10:26,330 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud002] within the service [dialog]
+2024-07-30 08:10:26,337 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,338 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud002].
+2024-07-30 08:10:26,344 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud001] within the service [dialog]
+2024-07-30 08:10:26,349 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,350 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud001].
+2024-07-30 08:10:26,355 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [mindifesa-openint-poc] within the service [dialog]
+2024-07-30 08:10:26,361 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,361 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [mindifesa-openint-poc].
+2024-07-30 08:10:26,368 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-demo] within the service [dialog]
+2024-07-30 08:10:26,373 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,374 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-demo].
+2024-07-30 08:10:26,380 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [aiwave.ai] within the service [dialog]
+2024-07-30 08:10:26,386 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,387 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [aiwave.ai].
+2024-07-30 08:10:26,397 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,398 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-conversationalai].
+2024-07-30 08:10:26,403 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [atenainf-welfare-tst] within the service [dialog]
+2024-07-30 08:10:26,409 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,409 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [atenainf-welfare-tst].
+2024-07-30 08:10:26,415 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [istat-convdata-tst] within the service [dialog]
+2024-07-30 08:10:26,421 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,422 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [istat-convdata-tst].
+2024-07-30 08:10:26,428 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-presales] within the service [dialog]
+2024-07-30 08:10:26,434 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,435 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-presales].
+2024-07-30 08:10:26,443 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [iccrea-ai4icc-tst] within the service [dialog]
+2024-07-30 08:10:26,448 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,449 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [iccrea-ai4icc-tst].
+2024-07-30 08:10:26,455 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [obdasys-ta] within the service [dialog]
+2024-07-30 08:10:26,461 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,462 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [obdasys-ta].
+2024-07-30 08:10:26,468 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [sogei-dttm-tst] within the service [dialog]
+2024-07-30 08:10:26,474 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,475 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [sogei-dttm-tst].
+2024-07-30 08:10:26,484 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-spe] within the service [dialog]
+2024-07-30 08:10:26,490 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,491 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-spe].
+2024-07-30 08:10:26,496 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [magnasc-intdep] within the service [dialog]
+2024-07-30 08:10:26,501 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,502 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [magnasc-intdep].
+2024-07-30 08:10:26,507 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-heca] within the service [dialog]
+2024-07-30 08:10:26,512 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,513 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-heca].
+2024-07-30 08:10:26,520 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-siwa] within the service [dialog]
+2024-07-30 08:10:26,525 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,526 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-siwa].
+2024-07-30 08:10:26,531 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-democnt] within the service [dialog]
+2024-07-30 08:10:26,537 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,537 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-democnt].
+2024-07-30 08:10:26,544 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [italferr-ai4if-tst] within the service [dialog]
+2024-07-30 08:10:26,550 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,551 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [italferr-ai4if-tst].
+2024-07-30 08:10:26,560 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [sogei-dttm] within the service [dialog]
+2024-07-30 08:10:26,567 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,568 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [sogei-dttm].
+2024-07-30 08:10:26,574 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud020] within the service [dialog]
+2024-07-30 08:10:26,584 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,585 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud020].
+2024-07-30 08:10:26,591 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [datappeal-ta] within the service [dialog]
+2024-07-30 08:10:26,603 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,604 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [datappeal-ta].
+2024-07-30 08:10:26,610 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-bighack2022] within the service [dialog]
+2024-07-30 08:10:26,616 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,616 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-bighack2022].
+2024-07-30 08:10:26,628 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [aiwave-ai] within the service [dialog]
+2024-07-30 08:10:26,633 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,634 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [aiwave-ai].
+2024-07-30 08:10:26,639 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-aieasy] within the service [dialog]
+2024-07-30 08:10:26,644 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,645 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-aieasy].
+2024-07-30 08:10:26,651 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-labrd] within the service [dialog]
+2024-07-30 08:10:26,656 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,657 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-labrd].
+2024-07-30 08:10:26,662 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud019] within the service [dialog]
+2024-07-30 08:10:26,668 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,668 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud019].
+2024-07-30 08:10:26,675 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud018] within the service [dialog]
+2024-07-30 08:10:26,680 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,681 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud018].
+2024-07-30 08:10:26,686 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud017] within the service [dialog]
+2024-07-30 08:10:26,692 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,693 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud017].
+2024-07-30 08:10:26,698 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud016] within the service [dialog]
+2024-07-30 08:10:26,704 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,705 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud016].
+2024-07-30 08:10:26,711 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud015] within the service [dialog]
+2024-07-30 08:10:26,716 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,717 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud015].
+2024-07-30 08:10:26,723 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud014] within the service [dialog]
+2024-07-30 08:10:26,728 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,729 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud014].
+2024-07-30 08:10:26,734 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [fsddti-uat] within the service [dialog]
+2024-07-30 08:10:26,739 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,739 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [fsddti-uat].
+2024-07-30 08:10:26,745 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud013] within the service [dialog]
+2024-07-30 08:10:26,750 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,751 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud013].
+2024-07-30 08:10:26,756 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud012] within the service [dialog]
+2024-07-30 08:10:26,761 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,761 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud012].
+2024-07-30 08:10:26,766 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud011] within the service [dialog]
+2024-07-30 08:10:26,771 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,772 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud011].
+2024-07-30 08:10:26,777 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-elstud010] within the service [dialog]
+2024-07-30 08:10:26,782 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,783 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-elstud010].
+2024-07-30 08:10:26,788 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-coso] within the service [dialog]
+2024-07-30 08:10:26,794 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,794 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-coso].
+2024-07-30 08:10:26,799 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [itbgp2-diab] within the service [dialog]
+2024-07-30 08:10:26,804 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,805 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [itbgp2-diab].
+2024-07-30 08:10:26,809 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almawave-enso] within the service [dialog]
+2024-07-30 08:10:26,815 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,815 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almawave-enso].
+2024-07-30 08:10:26,821 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [almaviva-joshua] within the service [dialog]
+2024-07-30 08:10:26,826 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,827 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [almaviva-joshua].
+2024-07-30 08:10:26,837 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [fsd-msd] within the service [dialog]
+2024-07-30 08:10:26,842 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,843 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [fsd-msd].
+2024-07-30 08:10:26,848 DEBUG [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000108: Create platform connection for tenant [dti-fsd] within the service [dialog]
+2024-07-30 08:10:26,853 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,854 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [dti-fsd].
+2024-07-30 08:10:26,862 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000504: Registering service instances [eventbus - 1.0] in the macroservice [dialog].
+2024-07-30 08:10:26,863 INFO  [it.alm.iri.cog.pla.registry] [it.alm.iri.cog.pla.reg.Subscriber] <> <> () (executor-thread-1) INFR-000506: Found [1] declared instances on [it.almawave.iride.cognitive.event_bus.EventBusSubscription] for tenant [undefined].
+2024-07-30 08:10:26,875 INFO  [it.alm.iri.cog.pla.client] [it.alm.iri.cog.pla.cli.ClientProducer] <> <> () (executor-thread-1) INFR-000100: Iride platform started for service [dialog].
+2024-07-30 08:10:32,366 INFO  [org.apa.kaf.cli.con.int.AbstractCoordinator] [org.apa.kaf.cli.con.int.AbstractCoordinator$HeartbeatResponseHandler] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] Attempt to heartbeat failed since group is rebalancing
+2024-07-30 08:10:32,367 INFO  [org.apa.kaf.cli.con.int.AbstractCoordinator] [org.apa.kaf.cli.con.int.AbstractCoordinator] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] (Re-)joining group
+2024-07-30 08:10:32,370 INFO  [org.apa.kaf.cli.con.int.AbstractCoordinator] [org.apa.kaf.cli.con.int.AbstractCoordinator$JoinGroupResponseHandler] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] Successfully joined group with generation Generation{generationId=4289, memberId='kafka-consumer-event_bus_watcher-9ec05fcd-68b7-4601-b3ea-58c300bf0f7d', protocol='cooperative-sticky'}
+2024-07-30 08:10:32,375 INFO  [org.apa.kaf.cli.con.int.AbstractCoordinator] [org.apa.kaf.cli.con.int.AbstractCoordinator$SyncGroupResponseHandler] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] Successfully synced group in generation Generation{generationId=4289, memberId='kafka-consumer-event_bus_watcher-9ec05fcd-68b7-4601-b3ea-58c300bf0f7d', protocol='cooperative-sticky'}
+2024-07-30 08:10:32,375 INFO  [org.apa.kaf.cli.con.int.ConsumerCoordinator] [org.apa.kaf.cli.con.int.ConsumerCoordinator] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] Updating assignment with
+	Assigned partitions:                       [dialog_event_bus-8, dialog_event_bus-9, dialog_event_bus-6, dialog_event_bus-7, dialog_event_bus-3]
+	Current owned partitions:                  [dialog_event_bus-9, dialog_event_bus-6, dialog_event_bus-7]
+	Added partitions (assigned - owned):       [dialog_event_bus-8, dialog_event_bus-3]
+	Revoked partitions (owned - assigned):     []
+
+2024-07-30 08:10:32,375 INFO  [org.apa.kaf.cli.con.int.ConsumerCoordinator] [org.apa.kaf.cli.con.int.ConsumerCoordinator] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] Notifying assignor about the new Assignment(partitions=[dialog_event_bus-6, dialog_event_bus-7, dialog_event_bus-9, dialog_event_bus-3, dialog_event_bus-8])
+2024-07-30 08:10:32,376 INFO  [org.apa.kaf.cli.con.int.ConsumerCoordinator] [org.apa.kaf.cli.con.int.ConsumerCoordinator] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] Adding newly assigned partitions: dialog_event_bus-8, dialog_event_bus-3
+2024-07-30 08:10:32,378 INFO  [org.apa.kaf.cli.con.int.ConsumerCoordinator] [org.apa.kaf.cli.con.int.ConsumerCoordinator] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] Setting offset for partition dialog_event_bus-8 to the committed offset FetchPosition{offset=53276, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[p-kafka01-n01.services.prd.boris.aiwave.io:9092 (id: 1 rack: null)], epoch=39}}
+2024-07-30 08:10:32,378 INFO  [org.apa.kaf.cli.con.int.ConsumerCoordinator] [org.apa.kaf.cli.con.int.ConsumerCoordinator] <> <> () (vert.x-kafka-consumer-thread-0) [Consumer clientId=kafka-consumer-event_bus_watcher, groupId=dialog_event_bus] Setting offset for partition dialog_event_bus-3 to the committed offset FetchPosition{offset=54342, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[p-kafka01-n01.services.prd.boris.aiwave.io:9092 (id: 1 rack: null)], epoch=42}}
+2024-07-30 08:11:23,777 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (5273b74d97784231) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [0] towards [upstream].
+2024-07-30 08:11:43,142 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (6e6aa98fc398d44d) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 08:11:43,167 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (517e83d05873f377) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 08:14:05,135 WARN  [it.alm.iri.cog.pla.cipher] [it.alm.iri.cog.pla.cyp.bas.inf.BasicCipher] <> <> () (vert.x-eventloop-thread-0) INFR-000702: Cannot setup the basic cipher, falling back to passthrough encryption.
+2024-07-30 08:14:08,565 WARN  [io.jae.int.JaegerSpan] [io.jae.int.JaegerSpan] <datappeal> <ta> (8f022bee28f4dea0) (vert.x-eventloop-thread-2) Span has already been finished; will not be reported again.
+2024-07-30 08:21:18,860 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (cbad4ec5c16a43dd) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 08:21:18,894 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (70fb7b033acc5995) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 08:21:19,234 WARN  [io.jae.int.JaegerSpan] [io.jae.int.JaegerSpan] <almawave> <conversationalai> (d19426c4190804a7) (vert.x-eventloop-thread-2) Span has already been finished; will not be reported again.
+2024-07-30 08:21:20,416 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (f898d3ba1255dd19) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 08:21:20,475 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (2a4e2ee64dcb1173) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 08:21:20,510 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (1bc88feaf191f0f0) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 08:21:20,863 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (1b597a84d1ca8d96) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 08:21:20,922 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (f827ffc9da7dca09) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 08:21:20,972 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (caedda4b58489228) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 08:21:22,237 WARN  [io.jae.int.JaegerSpan] [io.jae.int.JaegerSpan] <almawave> <conversationalai> (f8e78f1dbc2c5f71) (vert.x-eventloop-thread-2) Span has already been finished; will not be reported again.
+2024-07-30 08:21:22,245 WARN  [io.jae.int.JaegerSpan] [io.jae.int.JaegerSpan] <almawave> <conversationalai> (f8e78f1dbc2c5f71) (vert.x-eventloop-thread-2) Span has already been finished; will not be reported again.
+2024-07-30 08:23:32,884 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (e54a4b806d1fc132) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [0] towards [upstream].
+2024-07-30 08:23:32,913 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (17bf78ce19733fb4) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [0] towards [upstream].
+2024-07-30 08:23:34,440 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (3e33878c3b25e487) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [0] towards [upstream].
+2024-07-30 08:23:34,504 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (c3e713d5bff9bb2a) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [0] towards [upstream].
+2024-07-30 08:23:34,539 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (208051231af8a0cd) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [0] towards [upstream].
+2024-07-30 08:23:34,891 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (523ac2d5e7b07c65) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [0] towards [upstream].
+2024-07-30 08:23:34,939 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (b20c01ec9d776c91) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [0] towards [upstream].
+2024-07-30 08:23:34,991 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (3ffa20a085ab96c3) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [0] towards [upstream].
+2024-07-30 08:23:46,864 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (6fa97695f9b83547) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [9] towards [upstream].
+2024-07-30 08:23:46,929 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (2f72e539cb8b3429) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [9] towards [upstream].
+2024-07-30 08:23:47,446 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (9e40b8fdbc09c504) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [9] towards [upstream].
+2024-07-30 08:23:58,996 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (945504a021bbda61) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 08:23:59,472 WARN  [io.jae.int.JaegerSpan] [io.jae.int.JaegerSpan] <almawave> <conversationalai> (2e25403869cc9050) (vert.x-eventloop-thread-2) Span has already been finished; will not be reported again.
+2024-07-30 08:23:59,922 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (6fb85b4f6356f634) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 08:24:15,684 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <> <> () (executor-thread-1) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 08:31:50,147 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (ef4aa24eb803e856) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 08:31:50,176 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (feb0ddb70b423a54) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 08:31:50,843 WARN  [io.jae.int.JaegerSpan] [io.jae.int.JaegerSpan] <almawave> <conversationalai> (b647e3379258e237) (vert.x-eventloop-thread-2) Span has already been finished; will not be reported again.
+2024-07-30 08:31:51,695 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (d5d340ccc094c192) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 08:31:51,747 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (480c46809ec957cb) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 08:31:51,775 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (4d0a726a8bab633c) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 08:31:52,126 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (9e4d4b1b03ddcaf1) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 08:31:52,174 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (808bea4757341ce2) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 08:31:52,232 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (963526b4d4279103) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 08:31:52,856 WARN  [io.jae.int.JaegerSpan] [io.jae.int.JaegerSpan] <almawave> <conversationalai> (166032e235ba3058) (vert.x-eventloop-thread-2) Span has already been finished; will not be reported again.
+2024-07-30 08:31:53,861 WARN  [io.jae.int.JaegerSpan] [io.jae.int.JaegerSpan] <almawave> <conversationalai> (5075a5f49adbba5a) (vert.x-eventloop-thread-2) Span has already been finished; will not be reported again.
+2024-07-30 09:23:15,796 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (41a2ffa9dd57cb37) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 09:23:21,890 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <> <> () (executor-thread-1) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 09:23:21,924 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <> <> (467f6ee0386fb3f0) (executor-thread-1) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 09:23:22,749 WARN  [io.jae.int.JaegerSpan] [io.jae.int.JaegerSpan] <almawave> <conversationalai> (91c7ca383c035d5f) (vert.x-eventloop-thread-2) Span has already been finished; will not be reported again.
+2024-07-30 09:23:23,448 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <> <> (bdaf98ffff869562) (executor-thread-1) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 09:23:23,514 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <> <> (4fcf7b261253a4d4) (executor-thread-1) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 09:23:23,549 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <> <> (68b95c17cd2255bc) (executor-thread-1) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 09:23:24,286 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <> <> (cbcd3029f77347fa) (executor-thread-1) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 09:23:24,359 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <> <> (a96458906e22ef3b) (executor-thread-1) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 09:23:24,426 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <> <> (a62250a167ad78f2) (executor-thread-1) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 09:23:25,765 WARN  [io.jae.int.JaegerSpan] [io.jae.int.JaegerSpan] <almawave> <conversationalai> (abab72a9f9cf8653) (vert.x-eventloop-thread-2) Span has already been finished; will not be reported again.
+2024-07-30 09:23:54,685 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <> <> (1abf76716ce7917f) (executor-thread-1) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 09:23:54,752 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <> <> (e318ab2bc9948da0) (executor-thread-1) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 09:23:55,269 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (89f0776262a9342c) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 09:24:18,529 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <> <> (738e83273542aa6b) (executor-thread-1) CHANNEL-002021: Service signal will be dispatched on URI [0] towards [upstream].
+2024-07-30 09:24:19,467 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (35a6dc173a0aa549) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [0] towards [upstream].
+2024-07-30 09:25:05,262 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (4319cf4f331b6186) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 09:36:29,910 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (47195ef9d575dad1) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 09:36:29,936 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (d2468b1a731079bc) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 09:36:29,956 WARN  [io.jae.int.JaegerSpan] [io.jae.int.JaegerSpan] <almawave> <conversationalai> (928d2a46318d7644) (vert.x-eventloop-thread-2) Span has already been finished; will not be reported again.
+2024-07-30 09:36:31,464 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (8b14bf0f569a8486) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 09:36:31,515 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (5fad0cbb98dada82) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 09:36:31,542 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (61c3bdb3d67c3f8a) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 09:36:31,881 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (b5c1d853585b44bc) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 09:36:31,943 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (333b677e4e91062c) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 09:36:31,992 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (636ad828c4830852) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [6] towards [upstream].
+2024-07-30 09:36:32,961 WARN  [io.jae.int.JaegerSpan] [io.jae.int.JaegerSpan] <almawave> <conversationalai> (82fb11724601bba6) (vert.x-eventloop-thread-2) Span has already been finished; will not be reported again.
+2024-07-30 09:36:43,475 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (1f4ad900999e9ba9) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [0] towards [upstream].
+2024-07-30 09:36:43,539 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (bc9a252419798d7) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [0] towards [upstream].
+2024-07-30 09:36:44,055 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (5a294a9cc97b4143) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [0] towards [upstream].
+2024-07-30 09:36:48,827 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (e0f6c74013774f7d) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [1] towards [upstream].
+2024-07-30 09:36:49,736 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (9b1584cd060721dd) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [1] towards [upstream].
+2024-07-30 09:36:57,854 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <> <> (ef9b7a848f0258a2) (executor-thread-1) CHANNEL-002021: Service signal will be dispatched on URI [1] towards [upstream].
+2024-07-30 09:36:58,378 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (26400a4744d01787) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [1] towards [upstream].
+2024-07-30 09:37:02,856 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <> <> (81afa1c6d1476908) (executor-thread-1) CHANNEL-002021: Service signal will be dispatched on URI [0] towards [upstream].
+2024-07-30 09:37:03,374 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (6045d5c20140b39f) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [0] towards [upstream].
+2024-07-30 09:37:09,912 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <> <> (2f1ea39cbc51b4ab) (executor-thread-1) CHANNEL-002021: Service signal will be dispatched on URI [2] towards [upstream].
+2024-07-30 09:37:10,431 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (ac6bcdf9d2259422) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [2] towards [upstream].
+2024-07-30 09:37:13,905 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <> <> (1cd6fb80e293de18) (executor-thread-1) CHANNEL-002021: Service signal will be dispatched on URI [9] towards [upstream].
+2024-07-30 09:37:14,425 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (21190784c20e5d5f) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [9] towards [upstream].
+2024-07-30 09:37:16,030 WARN  [io.jae.int.JaegerSpan] [io.jae.int.JaegerSpan] <almawave> <conversationalai> (84f9d88b2501a9cf) (vert.x-eventloop-thread-2) Span has already been finished; will not be reported again.
+2024-07-30 09:37:23,912 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <> <> (7d4f63e659b3e692) (executor-thread-1) CHANNEL-002021: Service signal will be dispatched on URI [0] towards [upstream].
+2024-07-30 09:37:26,110 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <> <> (a04881523b0e40d7) (executor-thread-1) CHANNEL-002021: Service signal will be dispatched on URI [0] towards [upstream].
+2024-07-30 09:37:29,130 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (5a8ebb85212e1569) (vert.x-eventloop-thread-9) CHANNEL-002021: Service signal will be dispatched on URI [0] towards [upstream].
+2024-07-30 09:46:58,548 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (a7b592564bee4d55) (vert.x-eventloop-thread-8) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 09:46:58,574 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (cd7e2deda5348702) (vert.x-eventloop-thread-8) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 09:46:58,928 WARN  [io.jae.int.JaegerSpan] [io.jae.int.JaegerSpan] <almawave> <conversationalai> (32c3bb4170db8560) (vert.x-eventloop-thread-2) Span has already been finished; will not be reported again.
+2024-07-30 09:47:00,107 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (8022c295d9b82968) (vert.x-eventloop-thread-8) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 09:47:00,156 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (562bc4ec674a07d9) (vert.x-eventloop-thread-8) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 09:47:00,182 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (bd4fce8f5823200d) (vert.x-eventloop-thread-8) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 09:47:00,522 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (48a81b212c318124) (vert.x-eventloop-thread-8) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 09:47:00,566 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (7628a778be960756) (vert.x-eventloop-thread-8) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 09:47:00,617 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (147e00bbdb06b079) (vert.x-eventloop-thread-8) CHANNEL-002021: Service signal will be dispatched on URI [7] towards [upstream].
+2024-07-30 09:47:01,943 WARN  [io.jae.int.JaegerSpan] [io.jae.int.JaegerSpan] <almawave> <conversationalai> (90c7724ffd7ce967) (vert.x-eventloop-thread-2) Span has already been finished; will not be reported again.
+2024-07-30 09:53:42,445 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (aaee9d662c8fe0e9) (vert.x-eventloop-thread-8) CHANNEL-002021: Service signal will be dispatched on URI [2] towards [upstream].
+2024-07-30 09:53:42,473 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (485f643d155eae0d) (vert.x-eventloop-thread-8) CHANNEL-002021: Service signal will be dispatched on URI [2] towards [upstream].
+2024-07-30 09:53:43,990 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (7ee8266782b21fd9) (vert.x-eventloop-thread-8) CHANNEL-002021: Service signal will be dispatched on URI [2] towards [upstream].
+2024-07-30 09:53:44,038 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (cdbb1ba236607089) (vert.x-eventloop-thread-8) CHANNEL-002021: Service signal will be dispatched on URI [2] towards [upstream].
+2024-07-30 09:53:44,065 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (2fb5386a78ab13b) (vert.x-eventloop-thread-8) CHANNEL-002021: Service signal will be dispatched on URI [2] towards [upstream].
+2024-07-30 09:53:44,869 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (361e4609c2a2f759) (vert.x-eventloop-thread-8) CHANNEL-002021: Service signal will be dispatched on URI [2] towards [upstream].
+2024-07-30 09:53:44,912 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (5d721510c5a5a328) (vert.x-eventloop-thread-8) CHANNEL-002021: Service signal will be dispatched on URI [2] towards [upstream].
+2024-07-30 09:53:44,956 DEBUG [it.alm.iri.cog.eve.signal] [it.alm.iri.cog.eve.sig.ServiceSignalLogger] <almawave> <conversationalai> (f621402eb1652c9e) (vert.x-eventloop-thread-8) CHANNEL-002021: Service signal will be dispatched on URI [2] towards [upstream].
