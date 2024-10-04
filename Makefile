@@ -4,7 +4,7 @@ GOFLAGS :=
 LDFLAGS := -ldflags="-s -w"
 GCFLAGS := -gcflags="-m"
 
-SOURCES := ./cmd/cli/run.go
+SOURCES := ./cmd/run.go
 TARGET := cgnlog
 
 build: clean
