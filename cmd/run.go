@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/morphy76/cgnlog/cmd/cli"
 	"github.com/morphy76/cgnlog/internal/destination"
@@ -17,7 +18,9 @@ import (
 var inputFile string
 var outFormat string
 var keep bool
+var help bool
 var outFile string
+var outDelay time.Duration
 
 const steps = 6
 
@@ -25,6 +28,8 @@ func init() {
 	flag.StringVar(&inputFile, "input", "", "Input file path")
 	flag.StringVar(&outFormat, "format", "html", "Output format (html or json)")
 	flag.BoolVar(&keep, "keep", false, "Keep the output file")
+	flag.BoolVar(&help, "help", false, "Show help")
+	flag.DurationVar(&outDelay, "delay", 5, "Delay before exit in seconds")
 
 	flag.Usage = func() {
 		fmt.Fprint(flag.CommandLine.Output(), "\033[1;34mUsage:\033[0m\n")
@@ -32,6 +37,11 @@ func init() {
 	}
 
 	flag.Parse()
+
+	if help {
+		flag.Usage()
+		os.Exit(0)
+	}
 
 	if inputFile == "" {
 		fmt.Fprintf(flag.CommandLine.Output(), "\033[1;31mError: input file is required\033[0m\n")
@@ -103,6 +113,7 @@ func main() {
 	<-exitChan
 
 	if !keep {
+		<-time.After(outDelay * time.Second)
 		fmt.Println("Deleting output file... " + outFile)
 		if err := os.Remove(outFile); err != nil {
 			fmt.Println("Failed to delete output file:", err)
